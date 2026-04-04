@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDD Enterprises</title>
+    <meta name="description" content="RDD Enterprises — Innovation. Strategy. Execution.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #050508;
+            --surface: rgba(255,255,255,0.03);
+            --surface-hover: rgba(255,255,255,0.06);
+            --glass: rgba(255,255,255,0.05);
+            --glass-border: rgba(255,255,255,0.08);
+            --text: #eaeaea;
+            --text-dim: #888;
+            --red: #d63031;
+            --red-glow: rgba(214,48,49,0.35);
+            --silver: #b2bec3;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── Animated grid background ─── */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 100%);
+        }
+
+        /* ─── Floating orbs ─── */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 500px; height: 500px; background: rgba(214,48,49,0.08); top: -10%; left: -5%; animation-delay: 0s; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(178,190,195,0.06); bottom: 10%; right: -5%; animation-delay: -7s; }
+        .orb-3 { width: 300px; height: 300px; background: rgba(214,48,49,0.05); top: 60%; left: 40%; animation-delay: -14s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* ─── Navigation ─── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1rem 2.5rem;
+            background: rgba(5,5,8,0.7);
+            backdrop-filter: blur(30px) saturate(1.5);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+            transition: padding 0.3s;
+        }
+        nav.scrolled { padding: 0.6rem 2.5rem; }
+        nav img { height: 36px; width: auto; }
+        nav a {
+            color: var(--text-dim); text-decoration: none;
+            font-size: 0.8rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        nav a:hover { color: var(--text); border-color: var(--glass-border); background: var(--surface); }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative; z-index: 1;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 2rem;
+        }
+
+        .hero-logo {
+            width: min(420px, 80vw); height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 60px rgba(214,48,49,0.15));
+            animation: logoReveal 1.2s ease-out;
+        }
+
+        @keyframes logoReveal {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .hero-line {
+            width: 80px; height: 2px;
+            background: linear-gradient(90deg, var(--red), var(--silver));
+            margin-bottom: 2rem;
+            animation: lineGrow 1s ease-out 0.4s both;
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; opacity: 0; }
+            to { width: 80px; opacity: 1; }
+        }
+
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.85rem 2.2rem;
+            background: linear-gradient(135deg, var(--red), #c0392b);
+            color: #fff; text-decoration: none;
+            font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            border-radius: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 25px var(--red-glow);
+            animation: ctaReveal 0.8s ease-out 0.7s both;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--red-glow);
+        }
+        .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
+        .hero-cta:hover svg { transform: translateX(3px); }
+
+        @keyframes ctaReveal {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── Scroll indicator ─── */
+        .scroll-hint {
+            position: absolute; bottom: 2.5rem;
+            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            color: var(--text-dim); font-size: 0.7rem;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .scroll-hint span { display: block; width: 1px; height: 30px; background: linear-gradient(to bottom, var(--text-dim), transparent); }
+
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* ─── Contact Section ─── */
+        .contact {
+            position: relative; z-index: 1;
+            padding: 7rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 640px; margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 1rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(214,48,49,0.3);
+            border-radius: 4px;
+            background: rgba(214,48,49,0.05);
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--silver) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-dim);
+            font-size: 1rem; font-weight: 300;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* ─── Glass card form ─── */
+        .form-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-form {
+            display: flex; flex-direction: column; gap: 1.25rem;
+        }
+
+        .form-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.06em; text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: inherit; font-size: 0.95rem;
+            transition: all 0.3s; outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--red);
+            background: rgba(255,255,255,0.06);
+            box-shadow: 0 0 0 3px rgba(214,48,49,0.1);
+        }
+
+        .form-group textarea { min-height: 130px; resize: vertical; }
+
+        .submit-btn {
+            align-self: flex-start;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: linear-gradient(135deg, var(--red), #c0392b);
+            color: #fff; border: none;
+            border-radius: 8px;
+            font-family: inherit; font-size: 0.82rem;
+            font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px var(--red-glow);
+        }
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 30px var(--red-glow);
+        }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn svg { width: 16px; height: 16px; }
+
+        .form-status {
+            margin-top: 0.75rem; font-size: 0.9rem; display: none;
+            padding: 0.75rem 1rem; border-radius: 8px;
+        }
+        .form-status.success {
+            display: block; color: #00b894;
+            background: rgba(0,184,148,0.08); border: 1px solid rgba(0,184,148,0.2);
+        }
+        .form-status.error {
+            display: block; color: #e74c3c;
+            background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.2);
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            position: relative; z-index: 1;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+        footer p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.05em; }
+
+        /* ─── Scroll reveal ─── */
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            nav { padding: 0.75rem 1rem; }
+            nav img { height: 28px; }
+            .form-card { padding: 1.5rem; }
+            .submit-btn { width: 100%; justify-content: center; }
+            .hero-logo { width: min(320px, 85vw); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient background -->
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <nav id="nav">
+        <img src="assets/logo.jpeg" alt="RDD Enterprises">
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+    <section class="hero">
+        <img src="assets/logo.jpeg" alt="RDD Enterprises" class="hero-logo">
+        <div class="hero-line"></div>
+        <a href="#contact" class="hero-cta">
+            Get in Touch
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="scroll-hint">
+            <span></span>
+            Scroll
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="reveal">
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">Have a question or interested in working together? Drop us a message and we'll get back to you.</p>
+            </div>
+
+            <div class="form-card reveal">
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/mzdkkzqb" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required placeholder="Tell us more..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Send Message
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                    </button>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 RDD Enterprises. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Nav shrink on scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Form submission
+        const form = document.getElementById('contactForm');
+        const status = document.getElementById('formStatus');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = form.querySelector('.submit-btn');
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    status.textContent = 'Message sent successfully! We\'ll be in touch soon.';
+                    status.className = 'form-status success';
+                    form.reset();
+                } else {
+                    throw new Error('Failed');
+                }
+            } catch (err) {
+                status.textContent = 'Something went wrong. Please try again later.';
+                status.className = 'form-status error';
+            }
+
+            btn.innerHTML = 'Send Message <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+            btn.disabled = false;
+        });
+    </script>
+</body>
+</html>
