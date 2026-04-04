@@ -100,6 +100,16 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        .hero-tagline {
+            color: #fff;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: ctaReveal 0.8s ease-out 0.5s both;
+        }
+
         .hero-line {
             width: 80px; height: 2px;
             background: linear-gradient(90deg, var(--red), var(--silver));
@@ -310,6 +320,7 @@
         <div class="hero-logo-wrap">
             <img src="assets/logo-official.png" alt="RDD Enterprises" class="hero-logo">
         </div>
+        <p class="hero-tagline">Incubate. Invest. Execute.</p>
         <div class="hero-line"></div>
         <a href="#contact" class="hero-cta">
             Get in Touch
