@@ -371,6 +371,15 @@
             .form-card { padding: 1.5rem; }
             .submit-btn { width: 100%; justify-content: center; }
             .hero-logo { width: min(95vw, 500px); }            .hero { padding-top: 10rem; justify-content: flex-start; }
+
+            /* Disable all fade-in/delay animations on mobile */
+            .hero-logo { animation: none !important; opacity: 1 !important; transform: none !important; }
+            .hero-tagline { animation: none !important; opacity: 1 !important; transform: none !important; }
+            .hero-line { animation: none !important; width: 80px !important; opacity: 1 !important; }
+            .hero-line-delayed { animation: none !important; width: 80px !important; opacity: 1 !important; }
+            .hero-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
+            .hero-cta { animation: none !important; opacity: 1 !important; transform: none !important; }
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
         }
     </style>
 </head>
@@ -513,23 +522,27 @@
                 });
             }
 
-            function draw(t) {
+            const isMobile = window.innerWidth <= 600;
+
+            function drawFrame(t) {
                 ctx.fillStyle = '#050508';
                 ctx.fillRect(0, 0, w, h);
 
                 for (const b of blobs) {
-                    // Move
-                    b.x += b.vx;
-                    b.y += b.vy;
+                    if (!isMobile) {
+                        // Move blobs only on desktop
+                        b.x += b.vx;
+                        b.y += b.vy;
 
-                    // Wrap around edges
-                    if (b.x < -b.r) b.x = w + b.r;
-                    if (b.x > w + b.r) b.x = -b.r;
-                    if (b.y < -b.r) b.y = h + b.r;
-                    if (b.y > h + b.r) b.y = -b.r;
+                        // Wrap around edges
+                        if (b.x < -b.r) b.x = w + b.r;
+                        if (b.x > w + b.r) b.x = -b.r;
+                        if (b.y < -b.r) b.y = h + b.r;
+                        if (b.y > h + b.r) b.y = -b.r;
+                    }
 
-                    // Pulse size
-                    const pulse = Math.sin(t * b.pulseSpeed + b.phase) * 0.15 + 1;
+                    // Pulse size (static on mobile)
+                    const pulse = isMobile ? 1 : Math.sin(t * b.pulseSpeed + b.phase) * 0.15 + 1;
                     const r = b.r * pulse;
 
                     // Draw soft radial gradient blob
@@ -544,10 +557,15 @@
                     ctx.fill();
                 }
 
-                requestAnimationFrame(draw);
+                if (!isMobile) requestAnimationFrame(drawFrame);
             }
 
-            requestAnimationFrame(draw);
+            if (isMobile) {
+                // Draw once — static background, no animation loop
+                drawFrame(0);
+            } else {
+                requestAnimationFrame(drawFrame);
+            }
         })();
 
         // Nav dropdown toggle
