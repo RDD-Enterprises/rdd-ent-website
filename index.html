@@ -105,11 +105,11 @@
         /* ─── Hero ─── */
         .hero {
             position: relative; z-index: 1;
-            padding-top: 80px;
+            padding: 80px 2rem 2rem 2rem;
             min-height: 100vh;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            text-align: center; padding: 2rem;
+            text-align: center;
         }
 
         .hero-logo-wrap {
@@ -381,11 +381,11 @@
     <nav id="nav">
         <img src="assets/logo-official.png" alt="RDD Enterprises">
         <div class="nav-dropdown">
-            <button class="nav-menu-btn" id="menuBtn">
+            <button class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
                 Menu
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="nav-dropdown-menu" id="dropdownMenu">
+            <div class="nav-dropdown-menu" id="dropdownMenu" role="menu">
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact Us</a>
             </div>
@@ -556,9 +556,10 @@
         menuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdown.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', dropdown.classList.contains('open'));
         });
-        document.addEventListener('click', () => dropdown.classList.remove('open'));
-        dropdown.querySelector('.nav-dropdown-menu').addEventListener('click', () => dropdown.classList.remove('open'));
+        document.addEventListener('click', () => { dropdown.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
+        dropdown.querySelector('.nav-dropdown-menu').addEventListener('click', () => { dropdown.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
 
         // Nav shrink on scroll
         const nav = document.getElementById('nav');
@@ -584,6 +585,8 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = form.querySelector('.submit-btn');
+            status.className = 'form-status';
+            status.textContent = '';
             btn.innerHTML = 'Sending...';
             btn.disabled = true;
 
