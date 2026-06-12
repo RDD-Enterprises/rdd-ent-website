@@ -37,27 +37,32 @@
     </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <!-- Animated cloud background -->
-    <canvas id="clouds"></canvas>
+    <canvas id="clouds" aria-hidden="true"></canvas>
 
     <nav id="nav">
-        <img src="assets/logo-official.png" alt="RDD Enterprises">
+        <img src="assets/logo-nav.png" alt="" width="170" height="72">
         <div class="nav-dropdown">
-            <button class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdownMenu">
                 Menu
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="nav-dropdown-menu" id="dropdownMenu" role="menu">
+            <div class="nav-dropdown-menu" id="dropdownMenu">
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact Us</a>
             </div>
         </div>
     </nav>
 
+    <main id="main">
     <section class="hero">
-        <div class="hero-logo-wrap">
-            <img src="assets/logo-official.png" alt="RDD Enterprises" class="hero-logo">
-        </div>
+        <h1 class="hero-logo-wrap">
+            <picture>
+                <source srcset="assets/logo-official.webp" type="image/webp">
+                <img src="assets/logo-official.png" alt="RDD Enterprises" class="hero-logo" width="1021" height="432" fetchpriority="high">
+            </picture>
+        </h1>
         <p class="hero-tagline">Incubate. Invest. Execute.</p>
         <div class="hero-line"></div>
 
@@ -69,7 +74,7 @@
         <div class="hero-line hero-line-delayed"></div>
         <a href="#contact" class="hero-cta">
             Get in Touch
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
     </section>
 
@@ -83,37 +88,38 @@
 
             <div class="form-card reveal">
                 <form class="contact-form" id="contactForm" action="https://formspree.io/f/mzdkkzqb" method="POST">
-                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
+                            <input type="text" id="name" name="name" required autocomplete="name" maxlength="100" placeholder="Your name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                            <input type="email" id="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+                        <label for="phone">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="30" placeholder="(555) 555-5555">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required placeholder="Tell us more..."></textarea>
+                        <textarea id="message" name="message" required maxlength="5000" placeholder="Tell us more..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn">
-                        Send Message
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        <span class="btn-label">Send Message</span>
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
                     </button>
-                    <div class="form-status" id="formStatus"></div>
+                    <div class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></div>
                 </form>
             </div>
         </div>
     </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 RDD Enterprises. All rights reserved.</p>
+        <p>&copy; <span id="year">2026</span> RDD Enterprises. All rights reserved.</p>
     </footer>
 
     <script>
