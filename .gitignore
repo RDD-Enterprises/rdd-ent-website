@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Local tooling and plans (never publish to GitHub Pages)
+.claude/
+docs/
+
+# Logs
+*.log
