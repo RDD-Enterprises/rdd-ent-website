@@ -14,6 +14,7 @@
         }
 
         html { scroll-behavior: smooth; }
+        #about, #contact { scroll-margin-top: 80px; }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
@@ -35,9 +36,10 @@
 
         /* ─── Navigation ─── */
         nav {
-            position: fixed !important; top: 0 !important; left: 0; right: 0; z-index: 99999;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             padding: 1rem 2.5rem;
             background: rgba(5,5,8,0.95);
+            -webkit-backdrop-filter: blur(30px) saturate(1.5);
             backdrop-filter: blur(30px) saturate(1.5);
             border-bottom: 1px solid var(--glass-border);
             display: flex; justify-content: space-between; align-items: center;
@@ -47,15 +49,6 @@
         }
         nav.scrolled { padding: 0.6rem 2.5rem; }
         nav img { height: 36px; width: auto; }
-        nav a {
-            color: var(--text-dim); text-decoration: none;
-            font-size: 0.8rem; font-weight: 600;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            padding: 0.5rem 1.2rem;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
         /* ─── Nav dropdown ─── */
         .nav-dropdown { position: relative; }
         .nav-menu-btn {
@@ -71,7 +64,9 @@
         .nav-dropdown.open .nav-menu-btn svg { transform: rotate(180deg); }
         .nav-dropdown-menu {
             position: absolute; top: calc(100% + 0.5rem); right: 0;
-            background: rgba(15,15,20,0.95); backdrop-filter: blur(20px);
+            background: rgba(15,15,20,0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border); border-radius: 10px;
             padding: 0.4rem; min-width: 160px;
             opacity: 0; visibility: hidden; transform: translateY(-8px);
@@ -93,6 +88,7 @@
             position: relative; z-index: 1;
             padding: 80px 2rem 2rem 2rem;
             min-height: 100vh;
+            min-height: 100svh;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             text-align: center;
@@ -113,7 +109,7 @@
             z-index: 1;
             width: min(95vw, 85vh, 1200px); height: auto;
             filter: drop-shadow(0 0 40px rgba(214,48,49,0.15)) drop-shadow(0 0 100px rgba(214,48,49,0.06));
-            animation: logoReveal 1s ease-out;
+            animation: logoReveal 0.5s ease-out;
         }
 
         @keyframes logoReveal {
@@ -131,8 +127,8 @@
             animation: ctaReveal 0.8s ease-out 1s both;
         }
 
-        .hero-line-delayed {
-            animation: lineGrow 1s ease-out 3s both;
+        .hero-line.hero-line-delayed {
+            animation-delay: 3s;
         }
 
         .hero-fade-in {
@@ -198,18 +194,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ─── Scroll indicator ─── */
-        .scroll-hint {
-            position: absolute; bottom: 2.5rem;
-            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-            color: var(--text-dim); font-size: 0.7rem;
-            letter-spacing: 0.15em; text-transform: uppercase;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        .scroll-hint span { display: block; width: 1px; height: 30px; background: linear-gradient(to bottom, var(--text-dim), transparent); }
-
-        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-
         /* ─── Contact Section ─── */
         .contact {
             position: relative; z-index: 1;
@@ -224,7 +208,7 @@
             display: inline-block;
             font-size: 0.8rem; font-weight: 300;
             letter-spacing: 0.2em;
-            color: var(--red);
+            color: #e85d5e;
             margin-bottom: 1rem;
             padding: 0.3rem 0.8rem;
             border: 1px solid rgba(214,48,49,0.3);
@@ -236,6 +220,7 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 300;
             margin-bottom: 0.5rem;
+            color: var(--silver);
             background: linear-gradient(135deg, var(--text) 0%, var(--silver) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -254,6 +239,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             padding: 2.5rem;
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
         }
 
@@ -281,13 +267,13 @@
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 8px;
             color: var(--text);
-            font-family: inherit; font-size: 0.95rem;
+            font-family: inherit; font-size: 1rem;
             transition: all 0.3s; outline: none;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.55);
         }
 
         .form-group input:focus,
@@ -320,15 +306,15 @@
         .submit-btn svg { width: 16px; height: 16px; }
 
         .form-status {
-            margin-top: 0.75rem; font-size: 0.9rem; display: none;
-            padding: 0.75rem 1rem; border-radius: 8px;
+            margin-top: 0.75rem; font-size: 0.9rem;
+            border-radius: 8px;
         }
         .form-status.success {
-            display: block; color: #00b894;
+            color: #00b894; padding: 0.75rem 1rem;
             background: rgba(0,184,148,0.08); border: 1px solid rgba(0,184,148,0.2);
         }
         .form-status.error {
-            display: block; color: #e74c3c;
+            color: #e74c3c; padding: 0.75rem 1rem;
             background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.2);
         }
 
@@ -342,7 +328,7 @@
         footer p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.15em; }
 
         /* ─── Scroll reveal ─── */
-        .reveal {
+        .js .reveal {
             opacity: 0; transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
@@ -353,10 +339,10 @@
             .form-row { grid-template-columns: 1fr; }
             nav { padding: 0.5rem 1rem; } nav.scrolled { padding: 0.4rem 1rem; }
             nav img { height: 22px; }
-            .hero { padding-top: 100px; }
             .form-card { padding: 1.5rem; }
             .submit-btn { width: 100%; justify-content: center; }
-            .hero-logo { width: min(95vw, 500px); }            .hero { padding-top: 10rem; justify-content: flex-start; }
+            .hero { padding-top: 10rem; justify-content: flex-start; }
+            .hero-logo { width: min(95vw, 500px); }
 
             /* Disable all fade-in/delay animations on mobile */
             .hero-logo { animation: none !important; opacity: 1 !important; transform: none !important; }
@@ -367,4 +353,43 @@
             .hero-cta { animation: none !important; opacity: 1 !important; transform: none !important; }
             .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
         }
-    
+
+        /* ─── Accessibility and progressive enhancement ─── */
+        .hp { display: none; }
+
+        .skip-link {
+            position: absolute; top: 0; left: 0; z-index: 200;
+            padding: 0.75rem 1.25rem;
+            background: var(--red); color: #fff; text-decoration: none;
+            font-size: 0.85rem; letter-spacing: 0.1em;
+            border-radius: 0 0 8px 0;
+            transform: translateY(-110%);
+            transition: transform 0.2s;
+        }
+        .skip-link:focus { transform: translateY(0); }
+
+        .nav-menu-btn:focus-visible,
+        .nav-dropdown-menu a:focus-visible,
+        .hero-cta:focus-visible,
+        .submit-btn:focus-visible {
+            outline: 2px solid var(--red);
+            outline-offset: 2px;
+        }
+
+        .submit-btn[aria-disabled="true"] {
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        @media (forced-colors: active) {
+            .section-title { background: none; -webkit-text-fill-color: currentColor; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
