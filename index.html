@@ -3,408 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDD Enterprises</title>
-    <meta name="description" content="RDD Enterprises — Innovation. Strategy. Execution.">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://formspree.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action https://formspree.io;">
+    <title>RDD Enterprises | Private Venture Firm</title>
+    <meta name="description" content="RDD Enterprises is a private venture firm built on incubation, investment, and execution, deploying capital and operational support to build sustainable companies.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://formspree.io; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action https://formspree.io; upgrade-insecure-requests;">
+    <script>document.documentElement.classList.add('js')</script>
+    <link rel="canonical" href="https://rdd-enterprises.com/">
+    <meta name="theme-color" content="#050508">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RDD Enterprises">
+    <meta property="og:title" content="RDD Enterprises | Private Venture Firm">
+    <meta property="og:description" content="RDD Enterprises is a private venture firm built on incubation, investment, and execution, deploying capital and operational support to build sustainable companies.">
+    <meta property="og:url" content="https://rdd-enterprises.com/">
+    <meta property="og:image" content="https://rdd-enterprises.com/assets/logo-opaque.jpeg">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="829">
+    <meta name="twitter:card" content="summary">
+    <link rel="preload" as="image" href="assets/logo-official.webp" type="image/webp" fetchpriority="high">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #050508;
-            --surface: rgba(255,255,255,0.03);
-            --surface-hover: rgba(255,255,255,0.06);
-            --glass: rgba(255,255,255,0.05);
-            --glass-border: rgba(255,255,255,0.08);
-            --text: #eaeaea;
-            --text-dim: #888;
-            --red: #d63031;
-            --red-glow: rgba(214,48,49,0.35);
-            --silver: #b2bec3;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            font-weight: 300;
-            letter-spacing: 0.12em;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ─── Animated cloud canvas ─── */
-        #clouds {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ─── Navigation ─── */
-        nav {
-            position: fixed !important; top: 0 !important; left: 0; right: 0; z-index: 99999;
-            padding: 1rem 2.5rem;
-            background: rgba(5,5,8,0.95);
-            backdrop-filter: blur(30px) saturate(1.5);
-            border-bottom: 1px solid var(--glass-border);
-            display: flex; justify-content: space-between; align-items: center;
-            transition: padding 0.3s;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-        }
-        nav.scrolled { padding: 0.6rem 2.5rem; }
-        nav img { height: 36px; width: auto; }
-        nav a {
-            color: var(--text-dim); text-decoration: none;
-            font-size: 0.8rem; font-weight: 600;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            padding: 0.5rem 1.2rem;
-            border: 1px solid transparent;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
-        /* ─── Nav dropdown ─── */
-        .nav-dropdown { position: relative; }
-        .nav-menu-btn {
-            color: var(--text-dim); background: none; border: 1px solid transparent;
-            font-family: inherit; font-size: 0.85rem; font-weight: 300;
-            letter-spacing: 0.2em;
-            padding: 0.5rem 1.2rem; border-radius: 6px;
-            cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
-            transition: all 0.3s;
-        }
-        .nav-menu-btn:hover { color: var(--text); border-color: var(--glass-border); background: var(--surface); }
-        .nav-menu-btn svg { transition: transform 0.3s; }
-        .nav-dropdown.open .nav-menu-btn svg { transform: rotate(180deg); }
-        .nav-dropdown-menu {
-            position: absolute; top: calc(100% + 0.5rem); right: 0;
-            background: rgba(15,15,20,0.95); backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); border-radius: 10px;
-            padding: 0.4rem; min-width: 160px;
-            opacity: 0; visibility: hidden; transform: translateY(-8px);
-            transition: all 0.25s ease;
-        }
-        .nav-dropdown.open .nav-dropdown-menu {
-            opacity: 1; visibility: visible; transform: translateY(0);
-        }
-        .nav-dropdown-menu a {
-            display: block; color: var(--text-dim); text-decoration: none;
-            font-size: 0.85rem; font-weight: 300; letter-spacing: 0.15em;
-            text-transform: none;
-            padding: 0.65rem 1rem; border-radius: 6px; transition: all 0.2s;
-        }
-        .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface-hover); }
-
-        /* ─── Hero ─── */
-        .hero {
-            position: relative; z-index: 1;
-            padding: 80px 2rem 2rem 2rem;
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            text-align: center;
-        }
-
-        .hero-logo-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        /* Clouds flow behind transparent logo — no extra CSS glow needed */
-
-        .hero-logo {
-            position: relative;
-            z-index: 1;
-            width: min(95vw, 85vh, 1200px); height: auto;
-            filter: drop-shadow(0 0 40px rgba(214,48,49,0.15)) drop-shadow(0 0 100px rgba(214,48,49,0.06));
-            animation: logoReveal 1s ease-out;
-        }
-
-        @keyframes logoReveal {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .hero-tagline {
-            color: #fff;
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            font-weight: 300;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            animation: ctaReveal 0.8s ease-out 1s both;
-        }
-
-        .hero-line-delayed {
-            animation: lineGrow 1s ease-out 3s both;
-        }
-
-        .hero-fade-in {
-            opacity: 0; transform: translateY(20px);
-            animation: ctaReveal 1s ease-out 1.8s both;
-        }
-
-        /* ─── About section ─── */
-        .about-section {
-            max-width: 700px;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .about-heading {
-            font-size: clamp(1rem, 2.5vw, 1.4rem);
-            font-weight: 300;
-            letter-spacing: 0.35em;
-            color: #fff;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text {
-            color: var(--text-dim);
-            font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-            font-weight: 300;
-            line-height: 1.9;
-        }
-
-        .hero-line {
-            width: 80px; height: 2px;
-            background: linear-gradient(90deg, var(--red), var(--silver));
-            margin-bottom: 2rem;
-            animation: lineGrow 1s ease-out 1.4s both;
-        }
-
-        @keyframes lineGrow {
-            from { width: 0; opacity: 0; }
-            to { width: 80px; opacity: 1; }
-        }
-
-        .hero-cta {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            padding: 0.85rem 2.2rem;
-            background: linear-gradient(135deg, var(--red), #c0392b);
-            color: #fff; text-decoration: none;
-            font-size: 0.9rem; font-weight: 300;
-            letter-spacing: 0.2em;
-            border-radius: 8px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 25px var(--red-glow);
-            animation: ctaReveal 0.8s ease-out 3s both;
-        }
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 40px var(--red-glow);
-        }
-        .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
-        .hero-cta:hover svg { transform: translateX(3px); }
-
-        @keyframes ctaReveal {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ─── Scroll indicator ─── */
-        .scroll-hint {
-            position: absolute; bottom: 2.5rem;
-            display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-            color: var(--text-dim); font-size: 0.7rem;
-            letter-spacing: 0.15em; text-transform: uppercase;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        .scroll-hint span { display: block; width: 1px; height: 30px; background: linear-gradient(to bottom, var(--text-dim), transparent); }
-
-        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-        /* ─── Contact Section ─── */
-        .contact {
-            position: relative; z-index: 1;
-            padding: 7rem 2rem;
-        }
-
-        .contact-container {
-            max-width: 640px; margin: 0 auto;
-        }
-
-        .section-label {
-            display: inline-block;
-            font-size: 0.8rem; font-weight: 300;
-            letter-spacing: 0.2em;
-            color: var(--red);
-            margin-bottom: 1rem;
-            padding: 0.3rem 0.8rem;
-            border: 1px solid rgba(214,48,49,0.3);
-            border-radius: 4px;
-            background: rgba(214,48,49,0.05);
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text) 0%, var(--silver) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .section-subtitle {
-            color: var(--text-dim);
-            font-size: 1rem; font-weight: 300;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
-
-        /* ─── Glass card form ─── */
-        .form-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2.5rem;
-            backdrop-filter: blur(20px);
-        }
-
-        .contact-form {
-            display: flex; flex-direction: column; gap: 1.25rem;
-        }
-
-        .form-row {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.8rem; font-weight: 300;
-            color: var(--text-dim);
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.15em;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: inherit; font-size: 0.95rem;
-            transition: all 0.3s; outline: none;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.2);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--red);
-            background: rgba(255,255,255,0.06);
-            box-shadow: 0 0 0 3px rgba(214,48,49,0.1);
-        }
-
-        .form-group textarea { min-height: 130px; resize: vertical; }
-
-        .submit-btn {
-            align-self: flex-start;
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.85rem 2rem;
-            background: linear-gradient(135deg, var(--red), #c0392b);
-            color: #fff; border: none;
-            border-radius: 8px;
-            font-family: inherit; font-size: 0.85rem;
-            font-weight: 300; letter-spacing: 0.2em;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px var(--red-glow);
-        }
-        .submit-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 30px var(--red-glow);
-        }
-        .submit-btn:active { transform: translateY(0); }
-        .submit-btn svg { width: 16px; height: 16px; }
-
-        .form-status {
-            margin-top: 0.75rem; font-size: 0.9rem; display: none;
-            padding: 0.75rem 1rem; border-radius: 8px;
-        }
-        .form-status.success {
-            display: block; color: #00b894;
-            background: rgba(0,184,148,0.08); border: 1px solid rgba(0,184,148,0.2);
-        }
-        .form-status.error {
-            display: block; color: #e74c3c;
-            background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.2);
-        }
-
-        /* ─── Footer ─── */
-        footer {
-            position: relative; z-index: 1;
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-        }
-        footer p { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 0.15em; }
-
-        /* ─── Scroll reveal ─── */
-        .reveal {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 600px) {
-            .form-row { grid-template-columns: 1fr; }
-            nav { padding: 0.5rem 1rem; } nav.scrolled { padding: 0.4rem 1rem; }
-            nav img { height: 22px; }
-            .hero { padding-top: 100px; }
-            .form-card { padding: 1.5rem; }
-            .submit-btn { width: 100%; justify-content: center; }
-            .hero-logo { width: min(95vw, 500px); }            .hero { padding-top: 10rem; justify-content: flex-start; }
-
-            /* Disable all fade-in/delay animations on mobile */
-            .hero-logo { animation: none !important; opacity: 1 !important; transform: none !important; }
-            .hero-tagline { animation: none !important; opacity: 1 !important; transform: none !important; }
-            .hero-line { animation: none !important; width: 80px !important; opacity: 1 !important; }
-            .hero-line-delayed { animation: none !important; width: 80px !important; opacity: 1 !important; }
-            .hero-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
-            .hero-cta { animation: none !important; opacity: 1 !important; transform: none !important; }
-            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "RDD Enterprises",
+        "url": "https://rdd-enterprises.com/",
+        "logo": "https://rdd-enterprises.com/assets/logo-opaque.jpeg",
+        "description": "RDD Enterprises is a private venture firm built on incubation, investment, and execution."
+    }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <!-- Animated cloud background -->
-    <canvas id="clouds"></canvas>
+    <canvas id="clouds" aria-hidden="true"></canvas>
 
     <nav id="nav">
-        <img src="assets/logo-official.png" alt="RDD Enterprises">
+        <img src="assets/logo-nav.png" alt="" width="170" height="72">
         <div class="nav-dropdown">
-            <button class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
+            <button type="button" class="nav-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdownMenu">
                 Menu
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="nav-dropdown-menu" id="dropdownMenu" role="menu">
+            <div class="nav-dropdown-menu" id="dropdownMenu">
                 <a href="#about">About Us</a>
                 <a href="#contact">Contact Us</a>
             </div>
         </div>
     </nav>
 
+    <main id="main">
     <section class="hero">
-        <div class="hero-logo-wrap">
-            <img src="assets/logo-official.png" alt="RDD Enterprises" class="hero-logo">
-        </div>
+        <h1 class="hero-logo-wrap">
+            <picture>
+                <source srcset="assets/logo-official.webp" type="image/webp">
+                <img src="assets/logo-official.png" alt="RDD Enterprises" class="hero-logo" width="1021" height="432" fetchpriority="high">
+            </picture>
+        </h1>
         <p class="hero-tagline">Incubate. Invest. Execute.</p>
         <div class="hero-line"></div>
 
@@ -416,7 +74,7 @@
         <div class="hero-line hero-line-delayed"></div>
         <a href="#contact" class="hero-cta">
             Get in Touch
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
     </section>
 
@@ -430,197 +88,40 @@
 
             <div class="form-card reveal">
                 <form class="contact-form" id="contactForm" action="https://formspree.io/f/mzdkkzqb" method="POST">
-                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                    <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Your name">
+                            <input type="text" id="name" name="name" required autocomplete="name" maxlength="100" placeholder="Your name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                            <input type="email" id="email" name="email" required autocomplete="email" maxlength="254" placeholder="your@email.com">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+                        <label for="phone">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" maxlength="30" placeholder="(555) 555-5555">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" required placeholder="Tell us more..."></textarea>
+                        <textarea id="message" name="message" required maxlength="5000" placeholder="Tell us more..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn">
-                        Send Message
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        <span class="btn-label">Send Message</span>
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
                     </button>
-                    <div class="form-status" id="formStatus"></div>
+                    <div class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></div>
                 </form>
             </div>
         </div>
     </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 RDD Enterprises. All rights reserved.</p>
+        <p>&copy; <span id="year">2026</span> RDD Enterprises. All rights reserved.</p>
     </footer>
 
-    <script>
-        // ─── Animated cloud/smoke background ───
-        (function() {
-            const canvas = document.getElementById('clouds');
-            const ctx = canvas.getContext('2d');
-            let w, h;
-
-            function resize() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
-
-            // Cloud blobs — more clouds, more glow
-            const blobs = [];
-            const colors = [
-                [18, 16, 15],    // deep black
-                [22, 20, 18],    // soft black
-                [15, 14, 13],    // near black
-                [25, 23, 21],    // dark black
-                [20, 18, 16],    // black
-                [12, 11, 10],    // darkest black
-                [28, 26, 24],    // soft dark
-                [22, 20, 19],    // black tone
-                [16, 15, 14],    // near black
-                [30, 28, 26],    // lighter dark
-            ];
-
-            for (let i = 0; i < 24; i++) {
-                const c = colors[i % colors.length];
-                blobs.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    r: 180 + Math.random() * 350,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.3,
-                    color: c,
-                    alpha: 0.09 + Math.random() * 0.13,
-                    phase: Math.random() * Math.PI * 2,
-                    pulseSpeed: 0.002 + Math.random() * 0.006,
-                });
-            }
-
-            // Extra bright glow blobs in the center (behind logo area)
-            for (let i = 0; i < 4; i++) {
-                blobs.push({
-                    x: w * 0.4 + Math.random() * w * 0.2,
-                    y: h * 0.3 + Math.random() * h * 0.2,
-                    r: 250 + Math.random() * 200,
-                    vx: (Math.random() - 0.5) * 0.15,
-                    vy: (Math.random() - 0.5) * 0.1,
-                    color: [210, 45, 55],
-                    alpha: 0.12 + Math.random() * 0.07,
-                    phase: Math.random() * Math.PI * 2,
-                    pulseSpeed: 0.002 + Math.random() * 0.003,
-                });
-            }
-
-            function draw(t) {
-                ctx.fillStyle = '#050508';
-                ctx.fillRect(0, 0, w, h);
-
-                for (const b of blobs) {
-                    // Move
-                    b.x += b.vx;
-                    b.y += b.vy;
-
-                    // Wrap around edges
-                    if (b.x < -b.r) b.x = w + b.r;
-                    if (b.x > w + b.r) b.x = -b.r;
-                    if (b.y < -b.r) b.y = h + b.r;
-                    if (b.y > h + b.r) b.y = -b.r;
-
-                    // Pulse size
-                    const pulse = Math.sin(t * b.pulseSpeed + b.phase) * 0.15 + 1;
-                    const r = b.r * pulse;
-
-                    // Draw soft radial gradient blob
-                    const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, r);
-                    grad.addColorStop(0, `rgba(${b.color[0]},${b.color[1]},${b.color[2]},${b.alpha})`);
-                    grad.addColorStop(0.5, `rgba(${b.color[0]},${b.color[1]},${b.color[2]},${b.alpha * 0.4})`);
-                    grad.addColorStop(1, `rgba(${b.color[0]},${b.color[1]},${b.color[2]},0)`);
-
-                    ctx.fillStyle = grad;
-                    ctx.beginPath();
-                    ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-
-                requestAnimationFrame(draw);
-            }
-
-            requestAnimationFrame(draw);
-        })();
-
-        // Nav dropdown toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const dropdown = menuBtn.parentElement;
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('open');
-            menuBtn.setAttribute('aria-expanded', dropdown.classList.contains('open'));
-        });
-        document.addEventListener('click', () => { dropdown.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
-        dropdown.querySelector('.nav-dropdown-menu').addEventListener('click', () => { dropdown.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); });
-
-        // Nav shrink on scroll
-        const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-        reveals.forEach(el => observer.observe(el));
-
-        // Form submission
-        const form = document.getElementById('contactForm');
-        const status = document.getElementById('formStatus');
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = form.querySelector('.submit-btn');
-            status.className = 'form-status';
-            status.textContent = '';
-            btn.innerHTML = 'Sending...';
-            btn.disabled = true;
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    status.textContent = 'Message sent successfully! We\'ll be in touch soon.';
-                    status.className = 'form-status success';
-                    form.reset();
-                } else {
-                    throw new Error('Failed');
-                }
-            } catch (err) {
-                status.textContent = 'Something went wrong. Please try again later.';
-                status.className = 'form-status error';
-            }
-
-            btn.innerHTML = 'Send Message <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
-            btn.disabled = false;
-        });
-    </script>
+    <script src="assets/site.js" defer></script>
 </body>
 </html>
