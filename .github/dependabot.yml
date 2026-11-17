@@ -1,0 +1,19 @@
+# Workflow actions are pinned to full commit SHAs. Dependabot alerts do not
+# cover SHA pinned actions, so version updates are the only way pins pick up
+# security fixes. One grouped PR per month at most; it keeps the SHA pins.
+# The cooldown skips releases younger than 7 days, so a hijacked release has
+# time to be caught and pulled before it is ever proposed here.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "deps"
